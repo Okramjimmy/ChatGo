@@ -1,0 +1,39 @@
+[Unit]
+Description=ChatGo - Enterprise Real-Time Chat Platform
+Documentation=https://github.com/okrammeitei/chatgo
+After=network.target postgresql.service redis.service
+Requires=postgresql.service redis.service
+
+[Service]
+Type=simple
+User=chatgo
+Group=chatgo
+WorkingDirectory=/opt/chatgo
+
+# Load environment from file
+EnvironmentFile=-/etc/chatgo/chatgo.env
+
+ExecStart=/usr/local/bin/chatgo-server
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5s
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/chatgo /var/log/chatgo
+CapabilityBoundingSet=
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=512
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=chatgo
+
+[Install]
+WantedBy=multi-user.target
