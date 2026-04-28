@@ -31,7 +31,6 @@ func (h *Handler) Routes() chi.Router {
 	r.Post("/me/password", h.ChangePassword)
 
 	// Admin / general routes
-	r.Post("/", h.Create)
 	r.Get("/", h.List)
 	r.Get("/{id}", h.GetByID)
 	r.Delete("/{id}", h.Delete)
