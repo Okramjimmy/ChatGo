@@ -79,11 +79,25 @@ export $(grep -v '^#' .env | xargs) && make migrate
 ```
 
 ### 6. Start the Server
-Start the development server:
 
+There are two ways to start the server:
+
+**Option A: Development Mode (using `go run`)**
+Start the development server using the Makefile:
 ```bash
 export $(grep -v '^#' .env | xargs) && make run
 ```
+
+**Option B: Production Mode (using compiled binaries)**
+If you built the project in Step 4, you can run the compiled binaries directly from the `bin/` directory:
+```bash
+# Run the backend server
+export $(grep -v '^#' .env | xargs) && ./bin/chatgo-server
+
+# (Optional) Run migrations via compiled binary
+export $(grep -v '^#' .env | xargs) && ./bin/chatgo-migrate up
+```
+
 The server will start on `http://localhost:8081` (or whichever port you specified in `.env`).
 
 ---
