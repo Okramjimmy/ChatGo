@@ -50,7 +50,7 @@ type Permission struct {
 }
 
 type CreateUserRequest struct {
-	Username    string `json:"username" validate:"required,min=3,max=32,alphanum"`
+	Username    string `json:"username" validate:"required,min=3,max=32"`
 	Email       string `json:"email" validate:"required,email"`
 	Password    string `json:"password" validate:"required,min=8"`
 	DisplayName string `json:"display_name" validate:"required,min=1,max=64"`
